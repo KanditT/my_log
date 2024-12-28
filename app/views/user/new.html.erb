@@ -1,0 +1,59 @@
+<h1>Sign Up</h1>
+
+<!-- แสดงข้อผิดพลาดด้านบน -->
+<% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Errors:</h4>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @user, url: sign_up_path do |form| %>
+    <div class="mb-3">
+        <%= form.label :first_name, "Name" %>
+        <%= form.text_field :first_name, class: "form-control", placeholder: "Enter your name" %>
+        <% if @user.errors[:first_name].any? %>
+          <small class="text-danger"><%= @user.errors[:first_name].first %></small>
+        <% end %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :last_name, "Surname" %>
+        <%= form.text_field :last_name, class: "form-control", placeholder: "Enter your surname" %>
+        <% if @user.errors[:last_name].any? %>
+          <small class="text-danger"><%= @user.errors[:last_name].first %></small>
+        <% end %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :email, "Email" %>
+        <%= form.text_field :email, class: "form-control", placeholder: "Enter your email address" %>
+        <% if @user.errors[:email].any? %>
+          <small class="text-danger"><%= @user.errors[:email].first %></small>
+        <% end %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :password, "Password" %>
+        <%= form.password_field :password, class: "form-control", placeholder: "Enter your password" %>
+        <% if @user.errors[:password].any? %>
+          <small class="text-danger"><%= @user.errors[:password].first %></small>
+        <% end %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :password_confirmation, "Confirm password" %>
+        <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm your password" %>
+        <% if @user.errors[:password_confirmation].any? %>
+          <small class="text-danger"><%= @user.errors[:password_confirmation].first %></small>
+        <% end %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.submit "Sign Up", class: "btn btn-primary" %>
+    </div>
+<% end %>
